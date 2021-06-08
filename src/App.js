@@ -1,12 +1,43 @@
 import React,{useState,useEffect} from 'react';
 import './App.css';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Input from '@material-ui/core/Input';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Button from '@material-ui/core/Button';
+
+// work out how to use these!
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(.5),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+  formcontrol: {
+    color: theme.palette.text.primary
+  },
+  inputlabel: {
+    color: theme.palette.text.primary
+  },
+  input: {
+    color: theme.palette.text.primary
+  },
+  formhelpertext: {
+    color: theme.palette.text.primary
+  }
+}));
 
 const App = () => {
 const [pickIn, setPickIn] = React.useState([])
 const [pickOut, setPickOut] = React.useState([])
-const dataJson = require('./dvi.json')
-// const data = JSON.parse(dataJson)
-const data = dataJson
+const data = require('./dvi.json')
+const classes = useStyles();
 
 const handleSubmitIn = (event) => {
   event.preventDefault()
@@ -26,7 +57,6 @@ const handleSubmitOut = (event) => {
 
 }
 
-
   const totalPointsIn = pickIn.reduce((acc,cur) => {
     const points = data.find(pick => pick.pick === cur).points
     return acc + points 
@@ -39,10 +69,34 @@ const handleSubmitOut = (event) => {
 
     
     return <>
-      <form onSubmit={handleSubmitIn}>
+
+    <div className={classes.root}>
+      <Grid container spacing={3}>
+
+        <Grid item xs={6}>
+          <Paper className={classes.paper}>
+            <form className={classes.formcontrol} onSubmit={handleSubmitIn}>
+              <InputLabel htmlFor="my-input" className={classes.inputlabel}>Email address</InputLabel>
+              <Input name='pickIn' id="pickInId" type='number' aria-describedby="pickIdIn-helper-text" className={classes.input} />
+              <FormHelperText id="pickIdIn-helper-text" className={classes.formhelpertext}>Enter a draft pick</FormHelperText>
+              <Button variant="contained" color="primary" type="submit">
+                Add
+              </Button>
+            </form>
+          </Paper>
+        </Grid>
+        
+        <Grid item xs={6}>
+          <Paper className={classes.paper}>xs=6</Paper>
+        </Grid>
+        
+      </Grid>
+    </div>
+
+      {/* <form onSubmit={handleSubmitIn}>
         <input name='pickIn' type='number' />
         <button>Add</button>
-      </form>
+      </form> */}
 
       <form id = '2' onSubmit={handleSubmitOut}>
         <input name='pickOut' type='number' />
@@ -59,6 +113,9 @@ const handleSubmitOut = (event) => {
   
 
 }
+
+
+
 
 // function App() {
   // const [data,setData]=useState([]);
