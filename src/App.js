@@ -8,6 +8,10 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 
 // work out how to use these!
 const useStyles = makeStyles((theme) => ({
@@ -29,8 +33,23 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.primary
   },
   formhelpertext: {
-    color: theme.palette.text.primary
-  }
+    color: theme.palette.text.primary,
+    textAlign: 'center'
+  },
+  cardroot: {
+    minWidth: 275,
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
 }));
 
 const App = () => {
@@ -43,18 +62,14 @@ const handleSubmitIn = (event) => {
   event.preventDefault()
   const data = new FormData(event.target)
   const pickIn = data.get(`pickIn`)
-  // maybe a string of string do Number(data.get(‘pickIn’)
   setPickIn(prev => [...prev, Number(data.get('pickIn'))])
-
 }
 
 const handleSubmitOut = (event) => {
   event.preventDefault()
   const data = new FormData(event.target)
-  const pickIn = data.get(`pickOut`)
-  // maybe a string of string do Number(data.get(‘pickIn’)
+  const pickOut = data.get(`pickOut`)
   setPickOut(prev => [...prev, Number(data.get('pickOut'))])
-
 }
 
   const totalPointsIn = pickIn.reduce((acc,cur) => {
@@ -66,8 +81,9 @@ const handleSubmitOut = (event) => {
     const points = data.find(pick => pick.pick === cur).points
     return acc + points 
     },0)
+  
+  const bull = <span className={classes.bullet}>•</span>;
 
-    
     return <>
 
     <div className={classes.root}>
@@ -76,44 +92,100 @@ const handleSubmitOut = (event) => {
         <Grid item xs={6}>
           <Paper className={classes.paper}>
             <form className={classes.formcontrol} onSubmit={handleSubmitIn}>
-              <InputLabel htmlFor="my-input" className={classes.inputlabel}>Draft Pick</InputLabel>
+              <InputLabel htmlFor="my-input" className={classes.inputlabel}>Draft Pick In</InputLabel>
               <Input name='pickIn' id="pickInId" type='number' aria-describedby="pickIdIn-helper-text" className={classes.input} />
               <FormHelperText id="pickIdIn-helper-text" className={classes.formhelpertext}>Enter a draft pick</FormHelperText>
-              <Button variant="contained" color="primary" type="submit">
-                Add Another Draft Pick
+              <Button variant="contained" color="primary" type="submit" paddingTop='5px' paddingBottom='10px'>
+                Add
               </Button>
-              <br />
-              <br />
-              <Button variant="contained" color="secondary" type="submit">
+              {/* <br />
+              <Button variant="contained" color="secondary" type="submit" paddingTop='10px'>
                 Done
-              </Button>
+              </Button> */}
             </form>
           </Paper>
         </Grid>
         
         <Grid item xs={6}>
-          <Paper className={classes.paper}>xs=6</Paper>
+          <Paper className={classes.paper}>
+            <form className={classes.formcontrol} onSubmit={handleSubmitOut}>
+              <InputLabel htmlFor="my-input2" className={classes.inputlabel}>Draft Pick Out</InputLabel>
+              <Input name='pickOut' id="pickInOut" type='number' aria-describedby="pickIdOut-helper-text" className={classes.input} />
+              <FormHelperText id="pickIdOut-helper-text" className={classes.formhelpertext}>Enter a draft pick</FormHelperText>
+              <Button variant="contained" color="primary" type="submit">
+                Add
+              </Button>
+              {/* <br />
+              <br />
+              <Button variant="contained" color="secondary" type="submit">
+                Done
+              </Button> */}
+            </form>
+          </Paper>
         </Grid>
-        
+
+        <Grid item xs={6}>
+        <Card className={classes.cardroot}>
+          <CardContent>
+            {/* <Typography className={classes.title} color="textSecondary" gutterBottom>
+              Draft Picks In
+            </Typography> */}
+            <Typography variant="h5" component="h5" paddinBbottom="2px">
+              Team A
+            </Typography>
+            <Typography variant="body2" component="p" color="textSecondary" paddinBbottom="2px">
+              Picks Will Go Here ✔✔
+            </Typography>
+            {/* {pickIn.map((pick,index) => <p key={index}>{pick}</p>)} */}
+            {pickIn.map((pick,index) => <Typography key={index}>Pick: {pick}</Typography>)}
+            <Typography paddinBbottom="2px">
+              Total Points In: {totalPointsIn}
+            </Typography>
+            <Typography paddinBbottom="2px">
+              Difference: {totalPointsIn ?? 0 - totalPointsOut ?? 0}
+            </Typography>
+            <Typography paddinBbottom="2px">
+              Equivalent: Pick Equivalent Will Go Here ✔✔
+            </Typography>
+          </CardContent>
+          {/* <CardActions>
+            <Button size="small">Learn More</Button>
+          </CardActions> */}
+        </Card>
+        </Grid>
+
+        <Grid item xs={6}>
+        <Card className={classes.cardroot}>
+          <CardContent>
+            {/* <Typography className={classes.title} color="textSecondary" gutterBottom>
+              Draft Picks In
+            </Typography> */}
+            <Typography variant="h5" component="h5" paddinBbottom="2px">
+              Team B
+            </Typography>
+            <Typography variant="body2" component="p" color="textSecondary" paddinBbottom="2px">
+              Picks Will Go Here ✔✔
+            </Typography>
+            {/* {pickIn.map((pick,index) => <p key={index}>{pick}</p>)} */}
+            {pickOut.map((pick,index) => <Typography key={index}>Pick: {pick}</Typography>)}
+            <Typography paddinBbottom="2px">
+              Total Points Out: {totalPointsOut}
+            </Typography>
+            <Typography paddinBbottom="2px">
+              Difference: {totalPointsIn ?? 0 - totalPointsOut ?? 0}
+            </Typography>
+            <Typography paddinBbottom="2px">
+              Equivalent: Pick Equivalent Will Go Here ✔✔
+            </Typography>
+          </CardContent>
+          {/* <CardActions>
+            <Button size="small">Learn More</Button>
+          </CardActions> */}
+        </Card>
+        </Grid>
       </Grid>
     </div>
-
-      {/* <form onSubmit={handleSubmitIn}>
-        <input name='pickIn' type='number' />
-        <button>Add</button>
-      </form> */}
-
-      <form id = '2' onSubmit={handleSubmitOut}>
-        <input name='pickOut' type='number' />
-        <button>Add</button>
-      </form>
-
-      {pickIn.map((pick,index) => <p key={index}>{pick}</p>)}
-      <p>Total Points In: {totalPointsIn}</p>
-
-      {pickOut.map((pick,index) => <p key={index}>{pick}</p>)}
-      <p>Total Points Out: {totalPointsOut}</p> 
-
+    
     </>
   
 
@@ -121,37 +193,5 @@ const handleSubmitOut = (event) => {
 
 
 
-
-// function App() {
-  // const [data,setData]=useState([]);
-  // const getData=()=>{
-  //   fetch('./dvi.json'
-  //   ,{
-  //     headers : { 
-  //       'Content-Type': 'application/json',
-  //       'Accept': 'application/json'
-  //      }
-  //   }
-  //   )
-  //     .then(function(response){
-  //       console.log(response)
-  //       return response.json();
-  //     })
-  //     .then(function(myJson) {
-  //       console.log(myJson);
-  //       setData(myJson)
-  //     });
-  // }
-  // useEffect(()=>{
-  //   getData()
-  // },[])
-//   return (
-//     <div className="App">
-//      {
-//        data && data.length>0 && data.map((item)=><p>{item.points}</p>)
-//      }
-//     </div>
-//   );
-// }
 
 export default App;
