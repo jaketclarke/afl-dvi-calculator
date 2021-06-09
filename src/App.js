@@ -18,8 +18,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Link from '@material-ui/core/Link';
 import MailOutlineIcon from '@material-ui/icons/MailOutlined';
-import { FaGithub } from "react-icons/fa";
-import { ButtonBase } from '@material-ui/core';
+import { FaGit, FaGithub } from "react-icons/fa";
+import { ButtonBase, Icon } from '@material-ui/core';
 
 // work out how to use these!
 const useStyles = makeStyles((theme) => ({
@@ -57,8 +57,9 @@ const useStyles = makeStyles((theme) => ({
   appbarroot: {
     flexGrow: 1,
   },
-  menuButton: {
+  githubButton: {
     marginRight: theme.spacing(2),
+    color: 'secondary'
   },
   appbartitle: {
     flexGrow: 1,
@@ -140,18 +141,15 @@ const App = () => {
   <div className={classes.appbarroot}>
     <AppBar position="static">
         <Toolbar>
-          {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+          {/* <IconButton edge="start"  color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton> */}
           <Typography variant="h6" className={classes.appbartitle}>
             AFL Draft Value Index Trade Comparison Tool
           </Typography>
-          <Button
-            startIcon={<FaGithub />}
-            href="https://github.com/jaketclarke/afl-dvi-calculator"
-          >
-            View Code on GitHub
-          </Button>
+          <IconButton color='inherit'>
+            <FaGithub onClick={event =>  window.location.href='https://github.com/jaketclarke/afl-dvi-calculator'} />
+          </IconButton>
         </Toolbar>
       </AppBar>
     </div>
