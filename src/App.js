@@ -156,7 +156,7 @@ const App = () => {
       {/* ToDo implement order https://codesandbox.io/s/xvv7o07614 */}
       <Grid container spacing={3}>
         
-        <Grid item xs={3}>
+        <Grid item lg={3} md={6} sm={12}>
           <Card className={classes.cardroot}>
             <CardContent>
               <form className={classes.formcontrol} onSubmit={handleSubmitIn}>
@@ -176,7 +176,7 @@ const App = () => {
           </Card>
         </Grid>
 
-        <Grid item xs={4}>
+        <Grid item lg={4} md={6} sm={12}>
         <Card className={classes.cardroot}>
           <CardContent>
             <Typography variant="h5" component="h5">
@@ -189,7 +189,7 @@ const App = () => {
         </Card>
         </Grid>
 
-        <Grid item xs={5}>
+        <Grid item lg={5} md={6} sm={12}>
           <Card className={classes.cardroot}>
             <CardContent>
               <Typography variant="h5" component="h5">
@@ -208,7 +208,7 @@ const App = () => {
           </Card>
         </Grid>
 
-        <Grid item xs={3}>
+        <Grid item lg={3} md={6} sm={12}>
           <Card className={classes.cardroot}>
             <CardContent>
               <form className={classes.formcontrol} onSubmit={handleSubmitOut}>
@@ -227,7 +227,7 @@ const App = () => {
           </Card>
         </Grid>
 
-        <Grid item xs={4}>
+        <Grid item lg={4} md={6} sm={12}>
           <Card className={classes.cardroot}>
             <CardContent>
               {/* <Typography className={classes.title} color="textSecondary" gutterBottom>
@@ -243,7 +243,7 @@ const App = () => {
           </Card>
         </Grid>
 
-        <Grid item xs={5}>
+        <Grid item lg={5} md={6} sm={12}>
           <Card className={classes.cardroot}>
             <CardContent>
               <Typography variant="h5" component="h5">
