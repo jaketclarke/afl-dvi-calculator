@@ -82,7 +82,7 @@ const handleSubmitOut = (event) => {
     return acc + points 
     },0)
   
-  const bull = <span className={classes.bullet}>•</span>;
+  const diffIn = totalPointsIn ?? 0 - totalPointsOut ?? 0
 
     return <>
 
@@ -95,7 +95,7 @@ const handleSubmitOut = (event) => {
               <InputLabel htmlFor="my-input" className={classes.inputlabel}>Draft Pick In</InputLabel>
               <Input name='pickIn' id="pickInId" type='number' aria-describedby="pickIdIn-helper-text" className={classes.input} />
               <FormHelperText id="pickIdIn-helper-text" className={classes.formhelpertext}>Enter a draft pick</FormHelperText>
-              <Button variant="contained" color="primary" type="submit" paddingTop='5px' paddingBottom='10px'>
+              <Button variant="contained" color="primary" type="submit">
                 Add
               </Button>
               {/* <br />
@@ -142,7 +142,7 @@ const handleSubmitOut = (event) => {
               Total Points In: {totalPointsIn}
             </Typography>
             <Typography paddinBbottom="2px">
-              Difference: {totalPointsIn ?? 0 - totalPointsOut ?? 0}
+              Difference: {diffIn}
             </Typography>
             <Typography paddinBbottom="2px">
               Equivalent: Pick Equivalent Will Go Here ✔✔
@@ -172,7 +172,7 @@ const handleSubmitOut = (event) => {
               Total Points Out: {totalPointsOut}
             </Typography>
             <Typography paddinBbottom="2px">
-              Difference: {totalPointsIn ?? 0 - totalPointsOut ?? 0}
+              {/* Difference: {totalPointsIn ?? 0 - totalPointsOut ?? 0} */}
             </Typography>
             <Typography paddinBbottom="2px">
               Equivalent: Pick Equivalent Will Go Here ✔✔
@@ -185,7 +185,7 @@ const handleSubmitOut = (event) => {
         </Grid>
       </Grid>
     </div>
-    
+
     </>
   
 
