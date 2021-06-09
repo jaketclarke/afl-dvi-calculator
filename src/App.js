@@ -12,6 +12,11 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+
 
 // work out how to use these!
 const useStyles = makeStyles((theme) => ({
@@ -50,6 +55,15 @@ const useStyles = makeStyles((theme) => ({
   pos: {
     marginBottom: 12,
   },
+  appbarroot: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  appbartitle: {
+    flexGrow: 1,
+  }
 }));
 
 const App = () => {
@@ -85,9 +99,29 @@ const handleSubmitOut = (event) => {
   const diffIn = totalPointsIn - totalPointsOut
   const diffOut = totalPointsOut - totalPointsIn
 
-    return <>
+  const nearestPickIn = (diffIn) => {
+    const closest = data.find(spot => spot.points <= diffIn ).pick
+    console.log(closest)
+    return closest
+  }
 
+  return <>
+  <div className={classes.appbarroot}>
+    <AppBar position="static">
+        <Toolbar>
+          {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <MenuIcon />
+          </IconButton> */}
+          <Typography variant="h6" className={classes.appbartitle}>
+            AFL Draft Value Index Trade Comparison Tool
+          </Typography>
+          {/* make this a github button */}
+          <Button color="inherit">Login</Button>
+        </Toolbar>
+      </AppBar>
+    </div>
     <div className={classes.root}>
+      {/* ToDo implement order https://codesandbox.io/s/xvv7o07614 */}
       <Grid container spacing={3}>
 
         <Grid item xs={6}>
@@ -131,21 +165,21 @@ const handleSubmitOut = (event) => {
             {/* <Typography className={classes.title} color="textSecondary" gutterBottom>
               Draft Picks In
             </Typography> */}
-            <Typography variant="h5" component="h5" paddinBbottom="2px">
+            <Typography variant="h5" component="h5">
               Team A
             </Typography>
-            <Typography variant="body2" component="p" color="textSecondary" paddinBbottom="2px">
+            <Typography variant="body2" component="p" color="textSecondary">
               Picks Will Go Here ✔✔
             </Typography>
             {/* {pickIn.map((pick,index) => <p key={index}>{pick}</p>)} */}
             {pickIn.map((pick,index) => <Typography key={index}>Pick: {pick}</Typography>)}
-            <Typography paddinBbottom="2px">
+            <Typography>
               Total Points In: {totalPointsIn}
             </Typography>
-            <Typography paddinBbottom="2px">
+            <Typography>
               Difference: {diffIn}
             </Typography>
-            <Typography paddinBbottom="2px">
+            <Typography>
               Equivalent: Pick Equivalent Will Go Here ✔✔
             </Typography>
           </CardContent>
@@ -161,21 +195,21 @@ const handleSubmitOut = (event) => {
             {/* <Typography className={classes.title} color="textSecondary" gutterBottom>
               Draft Picks In
             </Typography> */}
-            <Typography variant="h5" component="h5" paddinBbottom="2px">
+            <Typography variant="h5" component="h5">
               Team B
             </Typography>
-            <Typography variant="body2" component="p" color="textSecondary" paddinBbottom="2px">
+            <Typography variant="body2" component="p" color="textSecondary">
               Picks Will Go Here ✔✔
             </Typography>
             {/* {pickIn.map((pick,index) => <p key={index}>{pick}</p>)} */}
             {pickOut.map((pick,index) => <Typography key={index}>Pick: {pick}</Typography>)}
-            <Typography paddinBbottom="2px">
+            <Typography>
               Total Points Out: {totalPointsOut}
             </Typography>
-            <Typography paddinBbottom="2px">
+            <Typography>
               Difference: {diffOut}
             </Typography>
-            <Typography paddinBbottom="2px">
+            <Typography>
               Equivalent: Pick Equivalent Will Go Here ✔✔
             </Typography>
           </CardContent>
