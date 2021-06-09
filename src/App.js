@@ -82,21 +82,54 @@ const handleSubmitOut = (event) => {
   setPickOut(prev => [...prev, Number(data.get('pickOut'))])
 }
 
-  const totalPointsIn = pickIn.reduce((acc,cur) => {
+  const totalPointsA = pickIn.reduce((acc,cur) => {
     const points = data.find(pick => pick.pick === cur).points
     return acc + points 
     },0)
 
-  const totalPointsOut = pickOut.reduce((acc,cur) => {
+  const totalPointsB = pickOut.reduce((acc,cur) => {
     const points = data.find(pick => pick.pick === cur).points
     return acc + points 
     },0)
   
-  const diffIn = totalPointsIn - totalPointsOut
-  const diffOut = totalPointsOut - totalPointsIn
+  const diffA = totalPointsA - totalPointsB
+  const diffB = totalPointsB - totalPointsA
 
-  const closestIn = data.find(spot => spot.points <= diffIn).pick
+  var closestA = 0
+  
+  // if diffA is positive, try to look it up, else error
+  // if diffA is negative, look up the absolute value, else error
+  if (diffA > 0) {
+    try {
+      closestA = data.find(spot => spot.points <= diffA).pick
+    } catch (error) {
+      console.log(error)
+      closestA = '-1'
+    }
+  } else {
+    try {
+      closestA = data.find(spot => spot.points <= Math.abs(diffA)).pick
+    } catch (error) {
+      console.log(error)
+      closestA = '-1'
+    }
+  }
 
+  if (diffB > 0) {
+    try {
+      closestB = data.find(spot => spot.points <= diffB).pick
+    } catch (error) {
+      console.log(error)
+      closestB = '-1'
+    }
+  } else {
+    try {
+      closestB = data.find(spot => spot.points <= Math.abs(diffB)).pick
+    } catch (error) {
+      console.log(error)
+      closestB = '-1'
+    }
+  }
 
   return <>
   <div className={classes.appbarroot}>
@@ -130,6 +163,7 @@ const handleSubmitOut = (event) => {
                   <InputLabel htmlFor="DraftPicksInA" className={classes.inputlabel}>
                     Team A
                   </InputLabel>
+                  {/* Put in validation for pick > 73 */}
                   <Input name='pickIn' id="pickInId" type='number' aria-describedby="pickIdIn-helper-text" className={classes.input} />
                   <FormHelperText id="pickIdIn-helper-text" className={classes.formhelpertext}>
                     Enter a draft pick that ends up with Team A
@@ -162,13 +196,13 @@ const handleSubmitOut = (event) => {
                 Team A - Summary
               </Typography>
               <Typography>
-                Total Points In: {totalPointsIn}
+                Total Points In: {totalPointsA}
               </Typography>
               <Typography>
-                Difference: {diffIn}
+                Difference: {diffA}
               </Typography>
               <Typography>
-                Equivalent Pick In: {closestIn}
+                Equivalent Pick {diffA > 0 ? 'In' : 'Out'}: {closestA}
               </Typography>
             </CardContent>
           </Card>
@@ -216,13 +250,13 @@ const handleSubmitOut = (event) => {
                 Team B - Summary
               </Typography>
               <Typography>
-                Total Points Out: {totalPointsOut}
+                Total Points Out: {totalPointsB}
               </Typography>
               <Typography>
-                Difference: {diffOut}
+                Difference: {diffB}
               </Typography>
               <Typography>
-                Equivalent: Pick Equivalent Will Go Here ✔✔
+                Equivalent Pick {diffB > 0 ? 'In' : 'Out'}: {closestB}
               </Typography>
             </CardContent>
           </Card>
