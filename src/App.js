@@ -13,6 +13,11 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import {  FaGithub } from "react-icons/fa";
+import ReactGA from 'react-ga';
+
+const { GOOGLE_ANALYTICS_MEASUREMENT_ID } = process.env;
+
+ReactGA.initialize(GOOGLE_ANALYTICS_MEASUREMENT_ID);
 
 // work out how to use these!
 const useStyles = makeStyles((theme) => ({
