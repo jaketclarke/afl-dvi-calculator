@@ -125,7 +125,10 @@ const handleSubmitOut = (event) => {
         <Grid item xs={6}>
           <Paper className={classes.paper}>
             <form className={classes.formcontrol} onSubmit={handleSubmitIn}>
-              <InputLabel htmlFor="my-input" className={classes.inputlabel}>Draft Pick In</InputLabel>
+              <Typography>
+                Enter the draft picks each team is giving away
+              </Typography>
+              <InputLabel htmlFor="DraftPicksInA" className={classes.inputlabel}>Draft Pick  - Team A</InputLabel>
               <Input name='pickIn' id="pickInId" type='number' aria-describedby="pickIdIn-helper-text" className={classes.input} />
               <FormHelperText id="pickIdIn-helper-text" className={classes.formhelpertext}>Enter a draft pick</FormHelperText>
               <Button variant="contained" color="primary" type="submit">
