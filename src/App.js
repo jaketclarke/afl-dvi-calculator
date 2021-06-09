@@ -82,7 +82,8 @@ const handleSubmitOut = (event) => {
     return acc + points 
     },0)
   
-  const diffIn = totalPointsIn ?? 0 - totalPointsOut ?? 0
+  const diffIn = totalPointsIn - totalPointsOut
+  const diffOut = totalPointsOut - totalPointsIn
 
     return <>
 
@@ -172,7 +173,7 @@ const handleSubmitOut = (event) => {
               Total Points Out: {totalPointsOut}
             </Typography>
             <Typography paddinBbottom="2px">
-              {/* Difference: {totalPointsIn ?? 0 - totalPointsOut ?? 0} */}
+              Difference: {diffOut}
             </Typography>
             <Typography paddinBbottom="2px">
               Equivalent: Pick Equivalent Will Go Here ✔✔
