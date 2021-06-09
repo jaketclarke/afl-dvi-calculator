@@ -36,9 +36,6 @@ const useStyles = makeStyles((theme) => ({
   formhelpertext: {
     color: theme.palette.text.primary
   },
-  cardroot: {
-    minWidth: 275,
-  },
   bullet: {
     display: 'inline-block',
     margin: '0 2px',
@@ -56,7 +53,61 @@ const useStyles = makeStyles((theme) => ({
   },
   appbartitle: {
     flexGrow: 1,
-  }
+  },
+  teamOneControl: {
+    order:1,
+  },
+  teamTwoControl: {
+    order:4,
+    [theme.breakpoints.down("md")]: {
+      order: 2
+    },
+    [theme.breakpoints.down("sm")]: {
+      order: 2
+    },
+    [theme.breakpoints.down("xs")]: {
+      order: 2
+    }
+  },
+  teamOneTrades: {
+    order:2,
+    [theme.breakpoints.down("md")]: {
+      order: 3
+    },
+    [theme.breakpoints.down("sm")]: {
+      order: 3
+    },
+    [theme.breakpoints.down("xs")]: {
+      order: 3
+    },
+  },
+  teamTwoTrades: {
+    order:5,
+    [theme.breakpoints.down("md")]: {
+      order: 4
+    },
+    [theme.breakpoints.down("sm")]: {
+      order: 4
+    },
+    [theme.breakpoints.down("xs")]: {
+      order: 4
+    },
+  },
+  teamOneSummary: {
+    order:3,
+    [theme.breakpoints.down("md")]: {
+      order: 5
+    },
+    [theme.breakpoints.down("sm")]: {
+      order: 5
+    },
+    [theme.breakpoints.down("xs")]: {
+      order: 5
+    },
+  },
+  teamTwoSummary: {
+    order:6,
+  },
 }));
 
 const App = () => {
@@ -140,8 +191,8 @@ const App = () => {
           <Typography variant="h6" className={classes.appbartitle}>
             AFL Draft Value Index Trade Comparison Tool
           </Typography>
-          <IconButton color='inherit'>
-            <FaGithub onClick={event =>  window.location.href='https://github.com/jaketclarke/afl-dvi-calculator'} />
+          <IconButton color='inherit' onClick={event =>  window.location.href='https://github.com/jaketclarke/afl-dvi-calculator'}>
+            <FaGithub  />
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -149,15 +200,21 @@ const App = () => {
 
     <br />
 
-    <Typography>
-      This tool is for helping understand the impact of complex pick swaps. Enter the picks two teams end up with in a deal to understand the impact of the pick swaps.
-    </Typography>
+    <div>
+      <Typography>
+        This tool is for helping understand the impact of complex pick swaps.
+      </Typography>
+      <Typography>
+        Enter the picks two teams end up with in a deal to understand the impact of the pick swaps.
+      </Typography>
+    </div>
+    <br />
     <div className={classes.root}>
       {/* ToDo implement order https://codesandbox.io/s/xvv7o07614 */}
       <Grid container spacing={3}>
         
-        <Grid item lg={3} md={6} sm={12}>
-          <Card className={classes.cardroot}>
+        <Grid item lg={3} md={6} sm={6} xs={12} className = {classes.teamOneControl}>
+          <Card>
             <CardContent>
               <form className={classes.formcontrol} onSubmit={handleSubmitIn}>
                   <InputLabel htmlFor="DraftPicksInA" className={classes.inputlabel}>
@@ -176,21 +233,21 @@ const App = () => {
           </Card>
         </Grid>
 
-        <Grid item lg={4} md={6} sm={12}>
-        <Card className={classes.cardroot}>
-          <CardContent>
-            <Typography variant="h5" component="h5">
-              Team A - Picks In
-            </Typography>
-            {/* make this a nice list! */}
-            {/* {pickIn.map((pick,index) => <p key={index}>{pick}</p>)} */}
-            {pickIn.map((pick,index) => <Typography key={index}>Pick: {pick}</Typography>)}
-          </CardContent>
-        </Card>
+        <Grid item lg={4} md={6} sm={6} xs={12} className = {classes.teamOneTrades}>
+          <Card>
+            <CardContent>
+              <Typography variant="h5" component="h5">
+                Team A - Picks In
+              </Typography>
+              {/* make this a nice list! */}
+              {/* {pickIn.map((pick,index) => <p key={index}>{pick}</p>)} */}
+              {pickIn.map((pick,index) => <Typography key={index}>Pick: {pick}</Typography>)}
+            </CardContent>
+          </Card>
         </Grid>
 
-        <Grid item lg={5} md={6} sm={12}>
-          <Card className={classes.cardroot}>
+        <Grid item lg={5} md={6} sm={6} xs={12} className = {classes.teamOneSummary}>
+          <Card>
             <CardContent>
               <Typography variant="h5" component="h5">
                 Team A - Summary
@@ -208,8 +265,8 @@ const App = () => {
           </Card>
         </Grid>
 
-        <Grid item lg={3} md={6} sm={12}>
-          <Card className={classes.cardroot}>
+        <Grid item lg={3} md={6} sm={6} xs={12} className = {classes.teamTwoControl}>
+          <Card>
             <CardContent>
               <form className={classes.formcontrol} onSubmit={handleSubmitOut}>
                 <InputLabel htmlFor="my-input2" className={classes.inputlabel}>
@@ -227,8 +284,8 @@ const App = () => {
           </Card>
         </Grid>
 
-        <Grid item lg={4} md={6} sm={12}>
-          <Card className={classes.cardroot}>
+        <Grid item lg={4} md={6} sm={6} xs={12} className = {classes.teamTwoTrades}>
+          <Card>
             <CardContent>
               {/* <Typography className={classes.title} color="textSecondary" gutterBottom>
                 Draft Picks In
@@ -243,8 +300,8 @@ const App = () => {
           </Card>
         </Grid>
 
-        <Grid item lg={5} md={6} sm={12}>
-          <Card className={classes.cardroot}>
+        <Grid item lg={5} md={6} sm={6} xs={12} className = {classes.teamTwoSummary}>
+          <Card>
             <CardContent>
               <Typography variant="h5" component="h5">
                 Team B - Summary
