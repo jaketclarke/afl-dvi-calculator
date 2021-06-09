@@ -6,6 +6,6 @@ This is a simple project to make it easier to understand the impact of complex t
 
 ### Getting Started
 
-1. clone repo
-2. yarn install
-3. yarn start
+* clone repo
+* `yarn install`
+* `yarn start`
