@@ -18,6 +18,7 @@ import ReactGA from 'react-ga';
 const { GOOGLE_ANALYTICS_MEASUREMENT_ID } = process.env;
 
 ReactGA.initialize(GOOGLE_ANALYTICS_MEASUREMENT_ID);
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 // work out how to use these!
 const useStyles = makeStyles((theme) => ({
