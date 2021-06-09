@@ -191,7 +191,10 @@ const App = () => {
           <Typography variant="h6" className={classes.appbartitle}>
             AFL Draft Value Index Trade Comparison Tool
           </Typography>
-          <IconButton color='inherit' onClick={event =>  window.location.href='https://github.com/jaketclarke/afl-dvi-calculator'}>
+          <IconButton
+            color='inherit'
+            onClick={event =>  window.location.href='https://github.com/jaketclarke/afl-dvi-calculator'}
+          >
             <FaGithub  />
           </IconButton>
         </Toolbar>
@@ -221,7 +224,13 @@ const App = () => {
                     Team A
                   </InputLabel>
                   {/* Put in validation for pick > 73 */}
-                  <Input name='pickIn' id="pickInId" type='number' aria-describedby="pickIdIn-helper-text" className={classes.input} />
+                  <Input
+                    name='pickIn'
+                    id="pickInId"
+                    type='number'
+                    aria-describedby="pickIdIn-helper-text"
+                    className={classes.input}
+                  />
                   <FormHelperText id="pickIdIn-helper-text" className={classes.formhelpertext}>
                     Enter a draft pick that ends up with Team A
                   </FormHelperText>
@@ -272,7 +281,13 @@ const App = () => {
                 <InputLabel htmlFor="my-input2" className={classes.inputlabel}>
                   Team B
                 </InputLabel>
-                <Input name='pickOut' id="pickInOut" type='number' aria-describedby="pickIdOut-helper-text" className={classes.input} />
+                <Input
+                  name='pickOut'
+                  id="pickInOut"
+                  type='number'
+                  aria-describedby="pickIdOut-helper-text"
+                  className={classes.input}
+                />
                 <FormHelperText id="pickIdOut-helper-text" className={classes.formhelpertext}>
                   Enter a draft pick that ends up with Team B
                 </FormHelperText>
@@ -326,8 +341,5 @@ const App = () => {
   
 
 }
-
-
-
 
 export default App;
