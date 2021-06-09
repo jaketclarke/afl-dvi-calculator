@@ -115,6 +115,8 @@ const handleSubmitOut = (event) => {
     }
   }
 
+  var closestB = 0
+
   if (diffB > 0) {
     try {
       closestB = data.find(spot => spot.points <= diffB).pick
