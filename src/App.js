@@ -152,8 +152,8 @@ const handleSubmitOut = (event) => {
     <br />
 
     <Typography>
-              This tool is for helping understand the impact of complex pick swaps. Enter the picks two teams end up with in a deal to understand the impact of the pick swaps.
-            </Typography>
+      This tool is for helping understand the impact of complex pick swaps. Enter the picks two teams end up with in a deal to understand the impact of the pick swaps.
+    </Typography>
     <div className={classes.root}>
       {/* ToDo implement order https://codesandbox.io/s/xvv7o07614 */}
       <Grid container spacing={3}>
