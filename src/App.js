@@ -99,11 +99,8 @@ const handleSubmitOut = (event) => {
   const diffIn = totalPointsIn - totalPointsOut
   const diffOut = totalPointsOut - totalPointsIn
 
-  const nearestPickIn = (diffIn) => {
-    const closest = data.find(spot => spot.points <= diffIn ).pick
-    console.log(closest)
-    return closest
-  }
+  const closestIn = data.find(spot => spot.points <= diffIn).pick
+
 
   return <>
   <div className={classes.appbarroot}>
@@ -120,6 +117,7 @@ const handleSubmitOut = (event) => {
         </Toolbar>
       </AppBar>
     </div>
+
     <div className={classes.root}>
       {/* ToDo implement order https://codesandbox.io/s/xvv7o07614 */}
       <Grid container spacing={3}>
@@ -180,7 +178,7 @@ const handleSubmitOut = (event) => {
               Difference: {diffIn}
             </Typography>
             <Typography>
-              Equivalent: Pick Equivalent Will Go Here ✔✔
+              Equivalent Pick In: {closestIn}
             </Typography>
           </CardContent>
           {/* <CardActions>
