@@ -25,8 +25,8 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(.5),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
+    // textAlign: 'center',
+    color: theme.palette.text.primary,
   },
   formcontrol: {
     color: theme.palette.text.primary
@@ -38,8 +38,7 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.primary
   },
   formhelpertext: {
-    color: theme.palette.text.primary,
-    textAlign: 'center'
+    color: theme.palette.text.primary
   },
   cardroot: {
     minWidth: 275,
@@ -48,9 +47,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'inline-block',
     margin: '0 2px',
     transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
   },
   pos: {
     marginBottom: 12,
@@ -118,107 +114,120 @@ const handleSubmitOut = (event) => {
       </AppBar>
     </div>
 
+    <br />
+
+    <Typography>
+              This tool is for helping understand the impact of complex pick swaps. Enter the picks two teams end up with in a deal to understand the impact of the pick swaps.
+            </Typography>
     <div className={classes.root}>
       {/* ToDo implement order https://codesandbox.io/s/xvv7o07614 */}
       <Grid container spacing={3}>
-
-        <Grid item xs={6}>
-          <Paper className={classes.paper}>
-            <form className={classes.formcontrol} onSubmit={handleSubmitIn}>
-              <Typography>
-                Enter the draft picks each team is giving away
-              </Typography>
-              <InputLabel htmlFor="DraftPicksInA" className={classes.inputlabel}>Draft Pick  - Team A</InputLabel>
-              <Input name='pickIn' id="pickInId" type='number' aria-describedby="pickIdIn-helper-text" className={classes.input} />
-              <FormHelperText id="pickIdIn-helper-text" className={classes.formhelpertext}>Enter a draft pick</FormHelperText>
-              <Button variant="contained" color="primary" type="submit">
-                Add
-              </Button>
-              {/* <br />
-              <Button variant="contained" color="secondary" type="submit" paddingTop='10px'>
-                Done
-              </Button> */}
-            </form>
-          </Paper>
-        </Grid>
         
-        <Grid item xs={6}>
-          <Paper className={classes.paper}>
-            <form className={classes.formcontrol} onSubmit={handleSubmitOut}>
-              <InputLabel htmlFor="my-input2" className={classes.inputlabel}>Draft Pick Out</InputLabel>
-              <Input name='pickOut' id="pickInOut" type='number' aria-describedby="pickIdOut-helper-text" className={classes.input} />
-              <FormHelperText id="pickIdOut-helper-text" className={classes.formhelpertext}>Enter a draft pick</FormHelperText>
-              <Button variant="contained" color="primary" type="submit">
-                Add
-              </Button>
-              {/* <br />
-              <br />
-              <Button variant="contained" color="secondary" type="submit">
-                Done
-              </Button> */}
-            </form>
-          </Paper>
+        <Grid item xs={3}>
+          <Card className={classes.cardroot}>
+            <CardContent>
+              <form className={classes.formcontrol} onSubmit={handleSubmitIn}>
+                  <InputLabel htmlFor="DraftPicksInA" className={classes.inputlabel}>
+                    Team A
+                  </InputLabel>
+                  <Input name='pickIn' id="pickInId" type='number' aria-describedby="pickIdIn-helper-text" className={classes.input} />
+                  <FormHelperText id="pickIdIn-helper-text" className={classes.formhelpertext}>
+                    Enter a draft pick that ends up with Team A
+                  </FormHelperText>
+                  <Button variant="contained" color="primary" type="submit">
+                    Add
+                  </Button>
+              </form>
+            </CardContent>
+          </Card>
         </Grid>
 
-        <Grid item xs={6}>
+        <Grid item xs={4}>
         <Card className={classes.cardroot}>
           <CardContent>
-            {/* <Typography className={classes.title} color="textSecondary" gutterBottom>
-              Draft Picks In
-            </Typography> */}
             <Typography variant="h5" component="h5">
-              Team A
+              Team A - Picks In
             </Typography>
-            <Typography variant="body2" component="p" color="textSecondary">
-              Picks Will Go Here ✔✔
-            </Typography>
+            {/* make this a nice list! */}
             {/* {pickIn.map((pick,index) => <p key={index}>{pick}</p>)} */}
             {pickIn.map((pick,index) => <Typography key={index}>Pick: {pick}</Typography>)}
-            <Typography>
-              Total Points In: {totalPointsIn}
-            </Typography>
-            <Typography>
-              Difference: {diffIn}
-            </Typography>
-            <Typography>
-              Equivalent Pick In: {closestIn}
-            </Typography>
           </CardContent>
-          {/* <CardActions>
-            <Button size="small">Learn More</Button>
-          </CardActions> */}
         </Card>
         </Grid>
 
-        <Grid item xs={6}>
-        <Card className={classes.cardroot}>
-          <CardContent>
-            {/* <Typography className={classes.title} color="textSecondary" gutterBottom>
-              Draft Picks In
-            </Typography> */}
-            <Typography variant="h5" component="h5">
-              Team B
-            </Typography>
-            <Typography variant="body2" component="p" color="textSecondary">
-              Picks Will Go Here ✔✔
-            </Typography>
-            {/* {pickIn.map((pick,index) => <p key={index}>{pick}</p>)} */}
-            {pickOut.map((pick,index) => <Typography key={index}>Pick: {pick}</Typography>)}
-            <Typography>
-              Total Points Out: {totalPointsOut}
-            </Typography>
-            <Typography>
-              Difference: {diffOut}
-            </Typography>
-            <Typography>
-              Equivalent: Pick Equivalent Will Go Here ✔✔
-            </Typography>
-          </CardContent>
-          {/* <CardActions>
-            <Button size="small">Learn More</Button>
-          </CardActions> */}
-        </Card>
+        <Grid item xs={5}>
+          <Card className={classes.cardroot}>
+            <CardContent>
+              <Typography variant="h5" component="h5">
+                Team A - Summary
+              </Typography>
+              <Typography>
+                Total Points In: {totalPointsIn}
+              </Typography>
+              <Typography>
+                Difference: {diffIn}
+              </Typography>
+              <Typography>
+                Equivalent Pick In: {closestIn}
+              </Typography>
+            </CardContent>
+          </Card>
         </Grid>
+
+        <Grid item xs={3}>
+          <Card className={classes.cardroot}>
+            <CardContent>
+              <form className={classes.formcontrol} onSubmit={handleSubmitOut}>
+                <InputLabel htmlFor="my-input2" className={classes.inputlabel}>
+                  Team B
+                </InputLabel>
+                <Input name='pickOut' id="pickInOut" type='number' aria-describedby="pickIdOut-helper-text" className={classes.input} />
+                <FormHelperText id="pickIdOut-helper-text" className={classes.formhelpertext}>
+                  Enter a draft pick that ends up with Team B
+                </FormHelperText>
+                <Button variant="contained" color="primary" type="submit">
+                  Add
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        <Grid item xs={4}>
+          <Card className={classes.cardroot}>
+            <CardContent>
+              {/* <Typography className={classes.title} color="textSecondary" gutterBottom>
+                Draft Picks In
+              </Typography> */}
+              
+              <Typography variant="h5" component="h5">
+                Team B - Picks In
+              </Typography>
+              {/* {pickIn.map((pick,index) => <p key={index}>{pick}</p>)} */}
+              {pickOut.map((pick,index) => <Typography key={index}>Pick: {pick}</Typography>)}
+            </CardContent>
+          </Card>
+        </Grid>
+
+        <Grid item xs={5}>
+          <Card className={classes.cardroot}>
+            <CardContent>
+              <Typography variant="h5" component="h5">
+                Team B - Summary
+              </Typography>
+              <Typography>
+                Total Points Out: {totalPointsOut}
+              </Typography>
+              <Typography>
+                Difference: {diffOut}
+              </Typography>
+              <Typography>
+                Equivalent: Pick Equivalent Will Go Here ✔✔
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        
       </Grid>
     </div>
 
