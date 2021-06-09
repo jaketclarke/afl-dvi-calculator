@@ -16,7 +16,10 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-
+import Link from '@material-ui/core/Link';
+import MailOutlineIcon from '@material-ui/icons/MailOutlined';
+import { FaGithub } from "react-icons/fa";
+import { ButtonBase } from '@material-ui/core';
 
 // work out how to use these!
 const useStyles = makeStyles((theme) => ({
@@ -63,24 +66,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const App = () => {
-const [pickIn, setPickIn] = React.useState([])
-const [pickOut, setPickOut] = React.useState([])
-const data = require('./dvi.json')
-const classes = useStyles();
+  const [pickIn, setPickIn] = React.useState([])
+  const [pickOut, setPickOut] = React.useState([])
+  const data = require('./dvi.json')
+  const classes = useStyles();
 
-const handleSubmitIn = (event) => {
-  event.preventDefault()
-  const data = new FormData(event.target)
-  const pickIn = data.get(`pickIn`)
-  setPickIn(prev => [...prev, Number(data.get('pickIn'))])
-}
+  const handleSubmitIn = (event) => {
+    event.preventDefault()
+    const data = new FormData(event.target)
+    const pickIn = data.get(`pickIn`)
+    setPickIn(prev => [...prev, Number(data.get('pickIn'))])
+  }
 
-const handleSubmitOut = (event) => {
-  event.preventDefault()
-  const data = new FormData(event.target)
-  const pickOut = data.get(`pickOut`)
-  setPickOut(prev => [...prev, Number(data.get('pickOut'))])
-}
+  const handleSubmitOut = (event) => {
+    event.preventDefault()
+    const data = new FormData(event.target)
+    const pickOut = data.get(`pickOut`)
+    setPickOut(prev => [...prev, Number(data.get('pickOut'))])
+  }
 
   const totalPointsA = pickIn.reduce((acc,cur) => {
     const points = data.find(pick => pick.pick === cur).points
@@ -91,12 +94,12 @@ const handleSubmitOut = (event) => {
     const points = data.find(pick => pick.pick === cur).points
     return acc + points 
     },0)
-  
+
   const diffA = totalPointsA - totalPointsB
   const diffB = totalPointsB - totalPointsA
 
   var closestA = 0
-  
+
   // if diffA is positive, try to look it up, else error
   // if diffA is negative, look up the absolute value, else error
   if (diffA > 0) {
@@ -143,8 +146,12 @@ const handleSubmitOut = (event) => {
           <Typography variant="h6" className={classes.appbartitle}>
             AFL Draft Value Index Trade Comparison Tool
           </Typography>
-          {/* make this a github button */}
-          <Button color="inherit">Login</Button>
+          <Button
+            startIcon={<FaGithub />}
+            href="https://github.com/jaketclarke/afl-dvi-calculator"
+          >
+            View Code on GitHub
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
